@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+.env
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env*
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# Caches
+.cache/
+.parcel-cache/
+.eslintcache
+.npm/
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# REPL history
+.node_repl_history
+
