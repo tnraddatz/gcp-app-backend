@@ -2,8 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
-const publicRoutes = require('./routes/public');
-const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -29,8 +28,7 @@ app.use(cors({
 app.use(express.json());
 
 // Mount the route handlers
-app.use('/api', publicRoutes);
-app.use('/api', authRoutes);
+app.use('/api', apiRoutes);
 
 app.listen(port, () => {
   console.log(`Backend listening at http://localhost:${port}`);
