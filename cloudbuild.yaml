@@ -1,0 +1,35 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '--platform', 'linux/amd64', '-t', 'gcr.io/$PROJECT_ID/gcp-app-backend:$COMMIT_SHA', '.']
+    dir: 'backend' # Specify the backend directory as the build context
+
+  # Push the Docker image to Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/gcp-app-backend:$COMMIT_SHA']
+
+  # Deploy the service to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'gcp-app-backend' # Your service name
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/gcp-app-backend:$COMMIT_SHA'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'us-central1'
+      - '--allow-unauthenticated'
+      - '--project'
+      - 'gcp-app-464623'  # Your Project ID - hardcoding to avoid variable substitution issues
+      - '--set-env-vars'  # Set environment variables
+      - 'GOOGLE_CLIENT_ID=$_GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET=$_GOOGLE_CLIENT_SECRET,NODE_ENV=production'
+
+substitutions:
+    _GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+    _GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+
+images:
+  - 'gcr.io/$PROJECT_ID/gcp-app-backend:$COMMIT_SHA'

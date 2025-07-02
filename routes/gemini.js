@@ -8,7 +8,7 @@ const { VertexAI } = require('@google-cloud/vertexai');
 // via the service account's permissions. For local development, you can
 // authenticate by running `gcloud auth application-default login` in your terminal.
 const vertexAI = new VertexAI({
-  project: process.env.GCP_PROJECT_ID || 'your-gcp-project-id',
+  project: process.env.GCP_PROJECT_ID || 'gcp-app-464623',
   location: process.env.GCP_LOCATION || 'us-central1',
 });
 
