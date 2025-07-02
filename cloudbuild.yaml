@@ -31,5 +31,5 @@ substitutions:
     _GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
     _GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
 
-images:
-  - 'gcr.io/$PROJECT_ID/gcp-app-backend:$COMMIT_SHA'
+options:
+  logging: CLOUD_LOGGING_ONLY
