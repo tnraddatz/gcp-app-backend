@@ -2,7 +2,6 @@ steps:
   # Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '--platform', 'linux/amd64', '-t', 'gcr.io/$PROJECT_ID/gcp-app-backend:$COMMIT_SHA', '.']
-    dir: 'backend' # Specify the backend directory as the build context
 
   # Push the Docker image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
