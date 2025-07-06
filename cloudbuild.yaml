@@ -24,11 +24,12 @@ steps:
       - '--project'
       - 'gcp-app-464623'  # Your Project ID - hardcoding to avoid variable substitution issues
       - '--set-env-vars'  # Set environment variables
-      - 'GOOGLE_CLIENT_ID=$_GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET=$_GOOGLE_CLIENT_SECRET,NODE_ENV=production'
+      - 'GOOGLE_CLIENT_ID=$_GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET=$_GOOGLE_CLIENT_SECRET,NODE_ENV=production,GEMINI_API_KEY=$_GEMINI_API_KEY'
 
 substitutions:
     _GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
     _GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+    _GEMINI_API_KEY: ${GEMINI_API_KEY}
 
 options:
   logging: CLOUD_LOGGING_ONLY
