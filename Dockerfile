@@ -3,12 +3,17 @@ FROM node:20 as builder
 
 WORKDIR /app
 
-# Copy package files and install all dependencies (including dev)
+# Copy package files and install all dependencies
+# This layer is only rebuilt if package.json or package-lock.json changes
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the source code
-COPY . .
+# Copy the tsconfig file
+COPY tsconfig.json ./
+
+# Copy your source code
+# This layer is only rebuilt if files in the src directory change
+COPY src ./src
 
 # Build the TypeScript code
 RUN npm run build
